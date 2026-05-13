@@ -1,7 +1,10 @@
 from flask import Flask, jsonify
 import psutil
+import time
 
 app = Flask(__name__)
+
+start_time = time.time()
 
 @app.route('/')
 def home():
@@ -11,14 +14,16 @@ def home():
 def health():
     cpu = psutil.cpu_percent()
     mem = psutil.virtual_memory().percent
+    uptime = time.time() - start_time
     return jsonify({
         "cpu_percent": cpu,
         "memory_percent": mem,
+        "uptime_seconds": uptime,
         "status": "healthy" if cpu < 80 and mem < 80 else "unhealthy"
     })
 
-@app.route('/metric')
-def metric():
+@app.route('/metrics')
+def metrics():
     cpu = psutil.cpu_percent()
     mem = psutil.virtual_memory().percent
     return f"""# HELP app_cpu_percent CPU usage percentage
@@ -30,4 +35,4 @@ app_memory_percent {mem}
 """
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5001)
+    app.run(host='0.0.0.0', port=5000)
