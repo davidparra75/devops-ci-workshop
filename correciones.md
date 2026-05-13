@@ -43,3 +43,13 @@
 - **Archivo:** requirements.txt
 - **Problema:** no esta instalado pytest en github actions 
 - **Solución:** agregar pytest a el requirements.txt `pytest==9.0.3`
+
+## Error 9
+- **Archivo:** Dockerfile
+- **Problema:** esta copiendo solo el app.py en vez de copiar todo 
+- **Solución:** cambiar `copy = app.py .` por `copy = . .`
+
+## Error 10
+- **Archivo:** app.py
+- **Problema:** prometehus espera el formato adecuado  
+- **Solución:** añadir linea `return Response(metrics_data, mimetype='text/plain')`
