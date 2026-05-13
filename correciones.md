@@ -12,7 +12,7 @@
 ## Error 2
 - **Archivo:** app.py
 - **Problema:** El endpoint /metrics estaba mal escrito, estaba /metric
-- **Solución:** Cambie `/metric` a `/metric`
+- **Solución:** Cambie `/metric` a `/metrics`
 
 ## Error 3
 - **Archivo:** test_app.py
@@ -38,3 +38,8 @@
 - **Archivo:** prometheus.yml
 - **Problema:** el servicio definido en el docker compose se llama api y no localhost
 - **Solución:** Cambié ` - targets: ['localhost:5000']` por ` - targets: ['api:5000']`
+
+## Error 8
+- **Archivo:** requirements.txt
+- **Problema:** no esta instalado pytest en github actions 
+- **Solución:** agregar pytest a el requirements.txt `pytest==9.0.3`
